@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class='text-center'>
+
+{% include 'base/navbar.html' %}
+<div class='text-center'>
         <h1>{{ title }}</h1>
     </div>
     <div class='container'>
@@ -16,5 +18,5 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 {% endblock %}

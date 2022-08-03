@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm, LoginForm, RegisterForm
@@ -17,7 +17,7 @@ def about_page(request):
                     "title": "Página Sobre about",
                     "content": "Bem vindo a página sobre"
               }
-    return render(request, "about/about_page.html", context)
+    return render(request, "about/view.html", context)
 
 def contact_page(request):
     contact_form = ContactForm(request.POST or None)
@@ -25,6 +25,7 @@ def contact_page(request):
                     "title": "Página Sobre contact",
                     "content": "Bem vindo a página sobre",
                     "form": contact_form
+
               }
     if contact_form.is_valid():
         print(contact_form.cleaned_data)
@@ -33,7 +34,7 @@ def contact_page(request):
         #print(request.POST.get('Nome_Completo'))
         #print(request.POST.get('email'))
         #print(request.POST.get('Mensagem'))
-    return render(request, "contact/contact_page.html", context)
+    return render(request, "contact/view.html", context)
 
 def login_page(request):
     form = LoginForm(request.POST or None)
@@ -60,6 +61,15 @@ def login_page(request):
             print("Login inválido")
     return render(request, "auth/login.html", context)
 
+
+def logout_page(request):
+    context = {
+                "content": "Você efetuou o logout com sucesso! :)"
+              }
+    logout(request)
+    return render(request, "auth/logout.html", context)
+
+
 User = get_user_model()
 def register_page(request):
     form = RegisterForm(request.POST or None)
@@ -74,5 +84,7 @@ def register_page(request):
         new_user = User.objects.create_user(username, email, password)
         print(new_user)
     return render(request, "auth/register.html", context)
+
+
 
 
