@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'tags',
     'carts',
     'orders',
+    'accounts',
+    'billing',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGOUT_REDIRECT_URL = '/login/'
 ROOT_URLCONF = 'virtual_store.urls'
 
 TEMPLATES = [
